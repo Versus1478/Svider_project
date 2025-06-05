@@ -572,7 +572,7 @@ https://templatemo.com/tm-568-digimedia
           </div>
         </div>
         <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
-          <form id="contact" action="partials/post.php" method="POST">
+          <form id="contact" action="Functions/Insert.php" method="POST">
             <div class="row">
               <div class="col-lg-12">
                 <div class="contact-dec">
