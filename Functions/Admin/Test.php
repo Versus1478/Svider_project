@@ -2,10 +2,8 @@
 require_once 'AdminPanel.php';
 
 $admin = new AdminPanel('localhost', 'root', 'root', 'test');
-
-$admin->createMessage("Test User", "test@example.com", "Test Subject", "Test message content");
-
 $messages = $admin->getAllMessages();
+$admin->closeConnection();
 ?>
 
 <!DOCTYPE html>
@@ -16,76 +14,100 @@ $messages = $admin->getAllMessages();
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            padding: 20px;
+            background: #f4f4f4;
+            padding: 30px;
         }
 
         h2 {
             text-align: center;
-            color: #333;
         }
 
-        .message {
-            background-color: #fff;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
             border-radius: 8px;
-            padding: 15px 20px;
-            margin: 15px auto;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 800px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        .message b {
-            font-size: 1.1em;
-            color: #2c3e50;
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
         }
 
-        .message i {
-            color: #7f8c8d;
-            font-style: italic;
+        th {
+            background-color: #2c3e50;
+            color: white;
         }
 
-        .message p {
-            margin-top: 10px;
-            color: #34495e;
-        }
-
-        .actions {
-            margin-top: 10px;
+        tr:hover {
+            background-color: #f1f1f1;
         }
 
         .actions a {
             text-decoration: none;
-            color: #2980b9;
-            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-size: 14px;
         }
 
-        .actions a:hover {
-            text-decoration: underline;
+        .edit {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .delete:hover {
+            background-color: #c0392b;
+        }
+
+        .edit:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
 
-<h2>📬 All Messages</h2>
+<h2>📋 Admin Panel — Messages</h2>
 
-<?php foreach ($messages as $msg): ?>
-    <div class="message">
-        <b><?= htmlspecialchars($msg['name']) ?></b> (<?= htmlspecialchars($msg['email']) ?>)<br>
-        <i><?= htmlspecialchars($msg['subject']) ?></i>
-        <p><?= nl2br(htmlspecialchars($msg['message'])) ?></p>
-        <div class="actions">
-            <a href="edit.php?id=<?= $msg['id'] ?>">✏️ Edit</a>
-            <a href="delete.php?id=<?= $msg['id'] ?>" onclick="return confirm('Are you sure you want to delete this message?')">🗑 Delete</a>
-        </div>
-    </div>
-<?php endforeach; ?>
+<?php if (count($messages) > 0): ?>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($messages as $msg): ?>
+            <tr>
+                <td><?= htmlspecialchars($msg['id']) ?></td>
+                <td><?= htmlspecialchars($msg['name']) ?></td>
+                <td><?= htmlspecialchars($msg['email']) ?></td>
+                <td><?= htmlspecialchars($msg['subject']) ?></td>
+                <td><?= nl2br(htmlspecialchars($msg['message'])) ?></td>
+                <td class="actions">
+                    <a class="edit" href="edit.php?id=<?= $msg['id'] ?>">✏️ Edit</a>
+                    <a class="delete" href="delete.php?id=<?= $msg['id'] ?>" onclick="return confirm('Are you sure you want to delete this message?')">🗑 Delete</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <p>No messages found.</p>
+<?php endif; ?>
 
 </body>
 </html>
-
-<?php
-$admin->closeConnection();
-?>
-
