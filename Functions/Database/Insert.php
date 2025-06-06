@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = trim($_POST['message']);
 
     if ($name && $email && $subject && $message) {
-        $inserter = new MessageInserter('localhost', 'root', '', 'contact_form_db');
+        $inserter = new MessageInserter('localhost', 'root', 'root', 'test');
         $inserter->insertMessage($name, $email, $subject, $message);
         $inserter->close();
     } else {

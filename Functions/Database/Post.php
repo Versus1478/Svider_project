@@ -32,14 +32,4 @@ class MessageInserter {
     }
 }
 
-$inserter = new MessageInserter('localhost', 'root', 'root', 'test');
-
-$name = 'John Doe';
-$email = 'john@example.com';
-$subject = 'Test Subject';
-$message = 'This is a test message.';
-
-$inserter->insertMessage($name, $email, $subject, $message);
-$inserter->close();
-
 ?>
