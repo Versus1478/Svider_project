@@ -1,4 +1,62 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['admin_logged_in'])): ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Access Denied</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8d7da;
+                color: #721c24;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .message-box {
+                background: #f5c6cb;
+                padding: 20px 40px;
+                border: 1px solid #f1b0b7;
+                border-radius: 8px;
+                text-align: center;
+            }
+            a.login-button {
+                display: inline-block;
+                margin-top: 15px;
+                padding: 10px 20px;
+                background-color: #721c24;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
+            a.login-button:hover {
+                background-color: #501217;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="message-box">
+        <h2>Access Denied</h2>
+        <p>You must be logged in as an admin to access this page.</p>
+        <a href="../Login/login.php" class="login-button">Go to Login</a>
+    </div>
+    </body>
+    </html>
+    <?php
+    exit();
+endif;
+?>
+
+
+<?php
 require_once 'AdminPanel.php';
 
 $admin = new AdminPanel('localhost', 'root', 'root', 'test');
@@ -29,6 +87,7 @@ $admin->closeConnection();
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
 
         th, td {
@@ -71,6 +130,27 @@ $admin->closeConnection();
         .edit:hover {
             background-color: #2980b9;
         }
+
+        .btn-back {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -108,6 +188,14 @@ $admin->closeConnection();
 <?php else: ?>
     <p>No messages found.</p>
 <?php endif; ?>
+
+<div class="btn-container">
+    <a href="../../index.php" class="btn-back">⬅️ Back to Home</a>
+</div>
+
+<div class="btn-container">
+<a href="../logout.php" class="btn-logout">Logout</a>
+</div>
 
 </body>
 </html>

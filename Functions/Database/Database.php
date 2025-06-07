@@ -7,16 +7,16 @@ class DatabaseManager {
     private $conn;
 
     public function __construct($host, $user, $password, $dbname) {
-        $this->host     = $host;
-        $this->user     = $user;
+        $this->host = $host;
+        $this->user = $user;
         $this->password = $password;
-        $this->dbname   = $dbname;
+        $this->dbname = $dbname;
 
         $this->connect();
         $this->createDatabase();
         $this->selectDatabase();
         $this->createTable();
-        $this->close();
+        // Не закриваємо з’єднання в конструкторі!
     }
 
     private function connect() {
@@ -30,7 +30,7 @@ class DatabaseManager {
     private function createDatabase() {
         $sql = "CREATE DATABASE IF NOT EXISTS {$this->dbname} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
         if ($this->conn->query($sql) === TRUE) {
-            echo "Database '{$this->dbname}' created or already exists.<br>";
+            // echo "Database '{$this->dbname}' created or already exists.<br>";
         } else {
             die("Database creation error: " . $this->conn->error);
         }
@@ -51,17 +51,18 @@ class DatabaseManager {
         )";
 
         if ($this->conn->query($sql) === TRUE) {
-            echo "Table 'messages' created or already exists.<br>";
+            // echo "Table 'messages' created or already exists.<br>";
         } else {
             echo "Table creation error: " . $this->conn->error;
         }
     }
 
-    private function close() {
+    public function getConnection() {
+        return $this->conn;
+    }
+
+    public function close() {
         $this->conn->close();
     }
 }
-
-new DatabaseManager('localhost', 'root', 'root', 'contact_form_db');
-
 ?>
