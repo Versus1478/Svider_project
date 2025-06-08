@@ -1,6 +1,6 @@
 <?php
 
-class AdminPanel {
+class adminPanel {
     private $conn;
 
     public function __construct($host, $user, $password, $dbname) {

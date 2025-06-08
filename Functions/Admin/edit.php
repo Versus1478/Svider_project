@@ -1,7 +1,7 @@
 <?php
-require_once 'AdminPanel.php';
+require_once 'adminPanel.php';
 
-$admin = new AdminPanel('localhost', 'root', 'root', 'test');
+$admin = new adminPanel('localhost', 'root', 'root', 'test');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = intval($_POST['id']);
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $admin->updateMessage($id, $name, $email, $subject, $message);
     $admin->closeConnection();
 
-    header('Location: Test.php');
+    header('Location: adminPage.php');
     exit();
 } elseif (isset($_GET['id'])) {
     $id = intval($_GET['id']);

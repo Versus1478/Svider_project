@@ -57,9 +57,9 @@ endif;
 
 
 <?php
-require_once 'AdminPanel.php';
+require_once 'adminPanel.php';
 
-$admin = new AdminPanel('localhost', 'root', 'root', 'test');
+$admin = new adminPanel('localhost', 'root', 'root', 'test');
 $messages = $admin->getAllMessages();
 $admin->closeConnection();
 ?>
@@ -161,7 +161,7 @@ $admin->closeConnection();
     <table>
         <thead>
         <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Subject</th>
@@ -193,8 +193,26 @@ $admin->closeConnection();
     <a href="../../index.php" class="btn-back">⬅️ Back to Home</a>
 </div>
 
-<div class="btn-container">
-<a href="../logout.php" class="btn-logout">Logout</a>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="../logout.php"
+       style="
+          display: inline-block;
+          padding: 10px 25px;
+          background-color: #e74c3c;
+          color: white;
+          font-weight: bold;
+          border-radius: 5px;
+          text-decoration: none;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          font-family: Arial, sans-serif;
+          font-size: 16px;
+          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+       "
+       onmouseover="this.style.backgroundColor='#c0392b'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+       onmouseout="this.style.backgroundColor='#e74c3c'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.2)';"
+    >
+        Logout
+    </a>
 </div>
 
 </body>
