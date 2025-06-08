@@ -19,7 +19,6 @@ class MessageInserter {
         $stmt->bind_param("ssss", $name, $email, $subject, $message);
 
         if ($stmt->execute()) {
-            // Output styled success message
             echo <<<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +65,7 @@ class MessageInserter {
 <body>
     <div class="message-box">
         <h2>Message sent successfully!</h2>
-        <a href="../../index.php" class="btn-home">Back to Home</a>
+        <a href="index.php" class="btn-home">Back to Home</a>
     </div>
 </body>
 </html>

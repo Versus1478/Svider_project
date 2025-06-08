@@ -1,62 +1,11 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['admin_logged_in'])): ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Access Denied</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f8d7da;
-                color: #721c24;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-            }
-            .message-box {
-                background: #f5c6cb;
-                padding: 20px 40px;
-                border: 1px solid #f1b0b7;
-                border-radius: 8px;
-                text-align: center;
-            }
-            a.login-button {
-                display: inline-block;
-                margin-top: 15px;
-                padding: 10px 20px;
-                background-color: #721c24;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
-                transition: background-color 0.3s ease;
-            }
-            a.login-button:hover {
-                background-color: #501217;
-            }
-        </style>
-    </head>
-    <body>
-    <div class="message-box">
-        <h2>Access Denied</h2>
-        <p>You must be logged in as an admin to access this page.</p>
-        <a href="../Login/login.php" class="login-button">Go to Login</a>
-    </div>
-    </body>
-    </html>
-    <?php
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: login.php');
     exit();
-endif;
-?>
+}
 
-
-<?php
 require_once 'adminPanel.php';
 
 $admin = new adminPanel('localhost', 'root', 'root', 'test');
@@ -75,11 +24,9 @@ $admin->closeConnection();
             background: #f4f4f4;
             padding: 30px;
         }
-
         h2 {
             text-align: center;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -89,22 +36,18 @@ $admin->closeConnection();
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
         }
-
         th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #eee;
         }
-
         th {
             background-color: #2c3e50;
             color: white;
         }
-
         tr:hover {
             background-color: #f1f1f1;
         }
-
         .actions a {
             text-decoration: none;
             padding: 5px 10px;
@@ -112,25 +55,20 @@ $admin->closeConnection();
             margin-right: 5px;
             font-size: 14px;
         }
-
         .edit {
             background-color: #3498db;
             color: white;
         }
-
         .delete {
             background-color: #e74c3c;
             color: white;
         }
-
         .delete:hover {
             background-color: #c0392b;
         }
-
         .edit:hover {
             background-color: #2980b9;
         }
-
         .btn-back {
             display: inline-block;
             background-color: #3498db;
@@ -142,11 +80,9 @@ $admin->closeConnection();
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-
         .btn-back:hover {
             background-color: #2980b9;
         }
-
         .btn-container {
             text-align: center;
             margin-top: 20px;
@@ -190,12 +126,11 @@ $admin->closeConnection();
 <?php endif; ?>
 
 <div class="btn-container">
-    <a href="../../index.php" class="btn-back">⬅️ Back to Home</a>
+    <a href="index.php" class="btn-back">⬅️ Back to Home</a>
 </div>
 
 <div style="text-align: center; margin-top: 20px;">
-    <a href="../logout.php"
-       style="
+    <a href="logout.php" style="
           display: inline-block;
           padding: 10px 25px;
           background-color: #e74c3c;
@@ -203,14 +138,8 @@ $admin->closeConnection();
           font-weight: bold;
           border-radius: 5px;
           text-decoration: none;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
           font-family: Arial, sans-serif;
-          font-size: 16px;
-          transition: background-color 0.3s ease, box-shadow 0.3s ease;
-       "
-       onmouseover="this.style.backgroundColor='#c0392b'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-       onmouseout="this.style.backgroundColor='#e74c3c'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.2)';"
-    >
+          font-size: 16px;">
         Logout
     </a>
 </div>

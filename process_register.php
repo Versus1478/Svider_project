@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../Database/Database.php');
+require_once('database.php');
 
 $db = new DatabaseManager('localhost', 'root', 'root', 'test');
 $conn = $db->getConnection();
@@ -24,7 +24,7 @@ if ($checkResult->num_rows > 0) {
 
     if ($stmt->execute()) {
         echo "<p style='color:green; font-weight:bold;'>Registration successful! 🎉</p>";
-        echo "<a href='../../index.php' style='display:inline-block; margin-top:10px; text-decoration:none; color:#2ecc71;'>Go to homepage</a>";
+        echo "<a href='index.php' style='display:inline-block; margin-top:10px; text-decoration:none; color:#2ecc71;'>Go to homepage</a>";
     } else {
         echo "<p style='color:red;'>Something went wrong. Please try again.</p>";
     }

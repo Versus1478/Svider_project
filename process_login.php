@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ('../Database/Database.php');
+require_once ('database.php');
 
 $dbManager = new DatabaseManager('localhost', 'root', 'root', 'test');
 $conn = $dbManager->getConnection();
@@ -22,21 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $user['username'];
             $_SESSION['admin_logged_in'] = true;
 
-            header('Location: ../Admin/adminPage.php');
+            header('Location: adminPage.php');
             exit();
         } else {
-            $error = "Incorrect password.";
+            $_SESSION['login_error'] = "Incorrect password.";
         }
     } else {
-        $error = "User not found.";
+        $_SESSION['login_error'] = "User not found.";
     }
 } else {
-    $error = "Invalid request.";
-}
-
-if (!empty($error)) {
-    echo "<p style='color:red;'>$error</p>";
+    $_SESSION['login_error'] = "Invalid request.";
 }
 
 $dbManager->close();
-?>
+
+header('Location: login.php');
+exit();

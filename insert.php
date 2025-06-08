@@ -1,5 +1,5 @@
 <?php
-require_once 'Post.php';
+require_once 'post.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
