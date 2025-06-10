@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $user['username'];
             $_SESSION['admin_logged_in'] = true;
 
-            header('Location: adminPage.php');
+            header('Location: index.php');
             exit();
         } else {
             $_SESSION['login_error'] = "Incorrect password.";

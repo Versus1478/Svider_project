@@ -50,10 +50,10 @@ https://templatemo.com/tm-568-digimedia
   $email = "digimedia@company.com";
   $phone = "010-020-0340";
   $social_links = [
-      'facebook' => '#',
-      'behance' => '#',
-      'twitter' => '#',
-      'dribbble' => '#',
+      'facebook' => 'https://www.facebook.com',
+      'behance' => 'https://www.behance.net',
+      'twitter' => 'https://twitter.com',
+      'dribbble' => 'https://dribbble.com',
   ];
   ?>
   <div class="pre-header">
@@ -61,20 +61,33 @@ https://templatemo.com/tm-568-digimedia
           <div class="row">
               <div class="col-lg-8 col-sm-8 col-7">
                   <ul class="info">
-                      <li><a href="mailto:<?= htmlspecialchars($email) ?>"><i class="fa fa-envelope"></i><?= htmlspecialchars($email) ?></a></li>
-                      <li><a href="tel:<?= preg_replace('/[^0-9+]/', '', $phone) ?>"><i class="fa fa-phone"></i><?= htmlspecialchars($phone) ?></a></li>
+                      <li>
+                          <a href="mailto:<?= htmlspecialchars($email) ?>">
+                              <i class="fa fa-envelope"></i><?= htmlspecialchars($email) ?>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="tel:<?= preg_replace('/[^0-9+]/', '', $phone) ?>">
+                              <i class="fa fa-phone"></i><?= htmlspecialchars($phone) ?>
+                          </a>
+                      </li>
                   </ul>
               </div>
               <div class="col-lg-4 col-sm-4 col-5">
                   <ul class="social-media">
                       <?php foreach ($social_links as $platform => $link): ?>
-                          <li><a href="<?= htmlspecialchars($link) ?>"><i class="fa fa-<?= htmlspecialchars($platform) ?>"></i></a></li>
+                          <li>
+                              <a href="<?= htmlspecialchars($link) ?>" target="_blank" rel="noopener noreferrer">
+                                  <i class="fa fa-<?= htmlspecialchars($platform) ?>"></i>
+                              </a>
+                          </li>
                       <?php endforeach; ?>
                   </ul>
               </div>
           </div>
       </div>
   </div>
+
 
   <!-- Pre-header End -->
 

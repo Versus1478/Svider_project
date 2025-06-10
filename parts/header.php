@@ -21,13 +21,13 @@
                         <li class="scroll-to-section"><a href="#blog">Blog</a></li>
                         <li class="scroll-to-section"><a href="#contact">Contact</a></li>
 
-                        <li class="scroll-to-section">
-                            <div class="border-first-button" style="background: none; padding: 1px; display: inline-flex">
+<!--                        <li class="scroll-to-section">-->
+                            <div class="border-first-button" style="background: none; padding-right: 16px;">
                                 <a class="btn-login" href="register.php">Register</a>
                             </div>
-                        </li>
+<!--                        </li>-->
 
-                        <li class="scroll-to-section">
+<!--                        <li class="scroll-to-section">-->
                             <div class="border-first-button" style="background: none; padding: 1px;">
                                 <?php if (!empty($_SESSION['username'])): ?>
                                     <span style="
@@ -49,7 +49,7 @@
                                     </a>
                                 <?php endif; ?>
                             </div>
-                        </li>
+<!--                        </li>-->
                     </ul>
 
                     <a class='menu-trigger' aria-label="Toggle menu">
